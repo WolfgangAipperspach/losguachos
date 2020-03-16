@@ -1,0 +1,16 @@
+name: automatic_strato_deployment
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:  
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: deploy
+      run: rsync -a --progress --delete -e "ssh -p 22" losguachos/ aipperspach.de@ssh.strato.de:losguachos/
+    
